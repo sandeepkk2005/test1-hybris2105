@@ -22,11 +22,12 @@ jobs:
           distribution: "adopt"
       - name: Build with Ant
         run: |
+          sudo apt-get install -y nodejs
+          node -v
+          npm -v
           cd bin/platform
           . ./setantenv.sh
-          pwd
-          ls
-          ant -noinput -buildfile build.xml
+          ant clean all
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:

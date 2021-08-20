@@ -1,0 +1,44 @@
+bin/modules/
+bin/platform/
+config/backup/
+data
+log
+roles
+temp
+
+# Standard Hybris files
+gensrc/
+classes/
+eclipsebin/
+.ruleset
+*.class
+build.xml
+build.properties
+platformhome.properties
+extensioninfo.xsd
+hmc.xsd
+items.xsd
+beans.xsd
+ruleset.xml
+rebel.xml
+*-testclasses.xml
+*-webtestclasses.xml
+.classpath.bak
+.springBeans.new
+
+
+#intellij files
+.idea/
+*.iml
+
+#osx files
+.DS_Store
+.gitconfig
+npm-debug.log
+velocity.log
+
+#Sublime project and workspace files
+*sublime-*
+
+#Vim Swap files
+*.swp

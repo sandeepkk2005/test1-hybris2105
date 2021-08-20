@@ -68,6 +68,7 @@ public class ForgottenPasswordEventListener extends AbstractAcceleratorSiteEvent
 		forgottenPasswordProcessModel.setStore(event.getBaseStore());
 		getModelService().save(forgottenPasswordProcessModel);
 		getBusinessProcessService().startProcess(forgottenPasswordProcessModel);
+		String name = "Sandeep";
 	}
 
 	@Override

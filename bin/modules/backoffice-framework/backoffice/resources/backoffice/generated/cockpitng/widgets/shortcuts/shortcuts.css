@@ -1,0 +1,22 @@
+.yw-shortcuts-widget.widget_body {
+  height: 100%; }
+.yw-shortcuts-widget .yw-shortcuts-header {
+  font-size: 14px;
+  padding-left: 10px;
+  color: #1e2830;
+  padding: 15px 0px 15px 20px;
+  border-bottom: 1px solid #bdc6d2; }
+.yw-shortcuts-widget .yw-listbox-body {
+  border: none; }
+  .yw-shortcuts-widget .yw-listbox-body .z-listcell {
+    padding-left: 30px;
+    border: none; }
+    .yw-shortcuts-widget .yw-listbox-body .z-listcell .z-listcell-content {
+      padding-left: 12px;
+      font-size: 14px; }
+.yw-shortcuts-widget div.z-listcell-content {
+  color: #1e2830; }
+.yw-shortcuts-widget tr.z-listitem-selected.z-listitem, .yw-shortcuts-widget tr.z-listitem-selected.z-listitem:hover {
+  background: none; }
+.yw-shortcuts-widget .z-listitem-selected > .z-listcell > .z-listcell-content {
+  color: #0486e0; }

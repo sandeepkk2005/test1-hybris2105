@@ -11,8 +11,6 @@ classes/
 eclipsebin/
 .ruleset
 *.class
-build.xml
-build.properties
 platformhome.properties
 extensioninfo.xsd
 hmc.xsd

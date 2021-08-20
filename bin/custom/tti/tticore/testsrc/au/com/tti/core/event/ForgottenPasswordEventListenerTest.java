@@ -73,4 +73,10 @@ public class ForgottenPasswordEventListenerTest
 		given(site.getChannel()).willReturn(channel);
 		assertThat(listener.getSiteChannelForEvent(event)).isEqualTo(channel);
 	}
+
+	@Test
+	public void testTestThis() throws Exception
+	{
+		assertThat(listener.testThis("name")).isEqualTo("name-Test-This");
+	}
 }

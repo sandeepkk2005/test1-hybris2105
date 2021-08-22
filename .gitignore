@@ -1,3 +1,5 @@
+bin/modules/
+bin/platform/
 config/backup/
 data
 log
@@ -21,7 +23,6 @@ rebel.xml
 *-webtestclasses.xml
 .classpath.bak
 .springBeans.new
-
 
 #intellij files
 .idea/

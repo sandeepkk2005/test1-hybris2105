@@ -22,12 +22,12 @@ jobs:
           distribution: "adopt"
       - name: Build with Ant
         run: |
-          sudo apt-get install -y nodejs
-          node -v
-          npm -v
-          cd bin/platform
+          cd bin
+          curl https://680414726872-files.s3.ap-southeast-2.amazonaws.com/hybris2105.zip -o hybris2105.zip
+          unzip -q hybris2105.zip -d .
+          cd platform
           . ./setantenv.sh
-          ant clean all
+          ant clean all -q -S
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:

@@ -6,6 +6,9 @@ log
 roles
 temp
 
+# Sonar
+sonar-scanner-cli
+
 # Standard Hybris files
 gensrc/
 classes/

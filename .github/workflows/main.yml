@@ -8,28 +8,58 @@ on:
     types: [opened, synchronize, reopened]
 name: Main Workflow
 jobs:
-  sonarcloud:
+  codeQuality:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           # Disabling shallow clone is recommended for improving relevancy of reporting
           fetch-depth: 0
+      - name: Cache NPM dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.OS }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-npm-cache-
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
           java-version: "11"
           distribution: "adopt"
-      - name: Build with Ant
+      - name: Cache Hybris Platform
+        id: cache-hybris-platform
+        uses: actions/cache@v2
+        with:
+          path: bin/platform
+          key: ${{ runner.os }}-hybris-platform
+      - name: Cache Hybris Modules
+        id: cache-hybris-modules
+        uses: actions/cache@v2
+        with:
+          path: bin/modules
+          key: ${{ runner.os }}-hybris-modules
+      - name: Download and Extract Hybris
+        if: steps.cache-hybris-platform.outputs.cache-hit != 'true'
         run: |
           cd bin
           curl https://680414726872-files.s3.ap-southeast-2.amazonaws.com/hybris2105.zip -o hybris2105.zip
           unzip -q hybris2105.zip -d .
-          cd platform
-          . ./setantenv.sh
-          ant clean all -q -S
-      - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@master
+      - name: Build with Ant
+        working-directory: ./bin/platform
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          . ./setantenv.sh
+          ant clean all -q -S
+          ant yunitinit -q -S
+          ant alltests -Dtestclasses.packages="au.com.tti.*" -Dtestclasses.extensions="ttibackoffice,tticore,ttifacades,ttifulfilmentprocess,ttiinitialdata,ttistorefront,ttitest"
+      - name: Sonar Check
+        working-directory: ./bin/platform
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          . ./setantenv.sh
+          ant sonarcheck -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=sandeepkk2005 -Dsonar.organizationKey=sandeepkk2005 -Dsonar.projectKey=sandeepkk2005_test-hybris2105 -Dsonar.pullrequest.provider=GitHub -Dsonar.projectName=test-hybris2105 -Dsonar.sources=bin/custom -Dsonar.inclusions=**/src/au/com/tti/**/*.java -Dsonar.tests=bin/custom -Dsonar.test.inclusions=**/testsrc/au/com/tti/**/*.java -Dsonar.junit.reportPaths=../../../../log/junit

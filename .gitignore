@@ -5,6 +5,7 @@ data
 log
 roles
 temp
+config/solr/instances/default/security.json
 
 # Sonar
 sonar-scanner-cli

@@ -62,4 +62,4 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           . ./setantenv.sh
-          ant sonarcheck -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=sandeepkk2005 -Dsonar.organizationKey=sandeepkk2005 -Dsonar.projectKey=sandeepkk2005_test-hybris2105 -Dsonar.pullrequest.provider=GitHub -Dsonar.projectName=test-hybris2105 -Dsonar.sources=bin/custom -Dsonar.inclusions=**/src/au/com/tti/**/*.java -Dsonar.tests=bin/custom -Dsonar.test.inclusions=**/testsrc/au/com/tti/**/*.java -Dsonar.junit.reportPaths=../../../../log/junit
+          ant sonarcheck -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=sandeepkk2005 -Dsonar.organizationKey=sandeepkk2005 -Dsonar.projectKey=sandeepkk2005_test1-hybris2105 -Dsonar.pullrequest.provider=GitHub -Dsonar.projectName=test1-hybris2105 -Dsonar.sources=bin/custom -Dsonar.inclusions=**/src/au/com/tti/**/*.java -Dsonar.tests=bin/custom -Dsonar.test.inclusions=**/testsrc/au/com/tti/**/*.java -Dsonar.junit.reportPaths=../../../../log/junit

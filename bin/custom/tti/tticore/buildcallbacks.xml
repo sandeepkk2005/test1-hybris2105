@@ -58,8 +58,9 @@
 		 <macrodef name="tticore_before_dist_copy"/>
 		 <macrodef name="tticore_after_dist_copy"/>
 
---><project name="tticore_buildcallbacks">
-    	
+--><project name="tticore_buildcallbacks" xmlns:jacoco="antlib:org.jacoco.ant">
+    <property name="result.report.dir" location="${HYBRIS_LOG_DIR}/jacoco" />
+
     <macrodef name="tticore_after_build">
         		
         <sequential>
@@ -123,7 +124,43 @@
         <exclude name="**/*.impex"/>
         	
     </patternset>
-    	
 
+    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+        <classpath path="${ext.tticore.path}/lib/jacocoant.jar"/>
+    </taskdef>
+
+    <target name="jacocoalltests" description="Runs alltests with JaCoCo">
+        <jacoco:agent property="agentvmparam" append="true" output="file" destfile="${result.report.dir}/jacoco-qt.exec" />
+        <ant dir="${platformhome}" target="alltests" inheritrefs="false">
+            <property name="standalone.javaoptions" value="${agentvmparam} ${standalone.javaoptions}" />
+            <property name="testclasses.packages" value="au.com.tti.*" />
+            <property name="testclasses.extensions" value="ttibackoffice,tticore,ttifacades,ttifulfilmentprocess,ttiinitialdata,ttistorefront,ttitest" />
+        </ant>
+    </target>
+
+    <target name="jacocoreport" description="Generates JaCoCo report">
+        <jacoco:report>
+            <executiondata>
+                <fileset dir="${result.report.dir}">
+                    <include name="*.exec" />
+                </fileset>
+            </executiondata>
+            <structure name="JaCoCo Ant">
+                <classfiles>
+                    <fileset dir="${basedir}/../custom/tti">
+                        <include name="*/classes/au/com/tti/**/*.class" />
+                    </fileset>
+                </classfiles>
+                <sourcefiles encoding="UTF-8">
+                    <fileset dir="${basedir}/../custom/tti">
+                        <include name="*/src/au/com/tti/**/*.java" />
+                    </fileset>
+                </sourcefiles>
+            </structure>
+            <html destdir="${result.report.dir}"/>
+            <csv destfile="${result.report.dir}/jacoco.csv" />
+            <xml destfile="${result.report.dir}/jacoco.xml" />
+        </jacoco:report>
+    </target>
 
 </project>

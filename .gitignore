@@ -6,6 +6,7 @@ log
 roles
 temp
 config/solr/instances/default/security.json
+ttibackoffice_bof.jar
 
 # Sonar
 sonar-scanner-cli
@@ -27,6 +28,7 @@ rebel.xml
 *-webtestclasses.xml
 .classpath.bak
 .springBeans.new
+build.xml
 
 #intellij files
 .idea/
@@ -43,3 +45,5 @@ velocity.log
 
 #Vim Swap files
 *.swp
+
+bin/custom/tti/ttibackoffice/resources/backoffice/ttibackoffice_bof.jar

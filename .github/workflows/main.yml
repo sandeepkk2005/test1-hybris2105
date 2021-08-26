@@ -47,19 +47,26 @@ jobs:
           unzip -q hybris2105.zip -d .
       - name: Build with Ant
         working-directory: ./bin/platform
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           . ./setantenv.sh
-          ant clean all -q -S
-          ant yunitinit -q -S
-          ant alltests -Dtestclasses.packages="au.com.tti.*" -Dtestclasses.extensions="ttibackoffice,tticore,ttifacades,ttifulfilmentprocess,ttiinitialdata,ttistorefront,ttitest"
+          ant clean all -q -S -noinput
+      #- name: Initialize JUnit tenant
+      #  working-directory: ./bin/platform
+      #  run: |
+      #    ant yunitinit -q -S -noinput
+      - name: Run JaCoCo tests
+        working-directory: ./bin/platform
+        run: |
+          ant jacocoalltests -q -S -noinput
+      - name: Generate JaCoCo Report
+        working-directory: ./bin/platform
+        run: |
+          ant jacocoreport -q -S -noinput
       - name: Sonar Check
         working-directory: ./bin/platform
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          . ./setantenv.sh
-          ant sonarcheck -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=sandeepkk2005 -Dsonar.organizationKey=sandeepkk2005 -Dsonar.projectKey=sandeepkk2005_test1-hybris2105 -Dsonar.pullrequest.provider=GitHub -Dsonar.projectName=test1-hybris2105 -Dsonar.sources=bin/custom -Dsonar.inclusions=**/src/au/com/tti/**/*.java -Dsonar.tests=bin/custom -Dsonar.test.inclusions=**/testsrc/au/com/tti/**/*.java -Dsonar.junit.reportPaths=../../../../log/junit
+          ls ../../log/jacoco/
+          ant sonarcheck -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=sandeepkk2005 -Dsonar.organizationKey=sandeepkk2005 -Dsonar.projectKey=sandeepkk2005_test1-hybris2105 -Dsonar.pullrequest.provider=GitHub -Dsonar.projectName=test1-hybris2105 -Dsonar.sources=bin/custom -Dsonar.inclusions=**/src/au/com/tti/**/*.java -Dsonar.tests=bin/custom -Dsonar.test.inclusions=**/testsrc/au/com/tti/**/*.java -Dsonar.junit.reportPaths=../../../../log/junit -Dsonar.coverage.jacoco.xmlReportPaths=../../../../log/jacoco/jacoco.xml

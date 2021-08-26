@@ -14,12 +14,12 @@
     <extension name='assistedservicecustomerinterestsaddon' />
     <extension name='assistedservicecustomerinterestsfacades' />
     <extension name='assistedservicefacades' />
-    <extension name='assistedservicepromotionaddon' />
+<!--    <extension name='assistedservicepromotionaddon' />-->
     <extension name='assistedservicepromotionfacades' />
     <extension name='assistedserviceservices' />
     <extension name='assistedservicestorefront' />
     <extension name='assistedservicewebservices' />
-    <extension name='assistedserviceyprofileaddon' />
+<!--    <extension name='assistedserviceyprofileaddon' />-->
     <extension name='assistedserviceyprofilefacades' />
     <extension name='yaasyprofileconnect' />
     <extension name='b2bacceleratoraddon' />
@@ -269,6 +269,8 @@
     <extension name='selectivecartfacades' />
     <extension name='selectivecartservices' />
     <extension name='selectivecartsplitlistaddon' />
+
+    <!--
     <extension name='cmssmartedit' />
     <extension name='cmssmarteditwebservices' />
     <extension name='smartedit' />
@@ -278,6 +280,8 @@
     <extension name='stocknotificationaddon' />
     <extension name='stocknotificationfacades' />
     <extension name='stocknotificationservices' />
+    -->
+
     <!--
     <extension name='subscriptionbundlecockpits' />
     <extension name='subscriptionbundlebackoffice' />

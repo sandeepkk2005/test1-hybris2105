@@ -45,5 +45,3 @@ velocity.log
 
 #Vim Swap files
 *.swp
-
-bin/custom/tti/ttibackoffice/resources/backoffice/ttibackoffice_bof.jar

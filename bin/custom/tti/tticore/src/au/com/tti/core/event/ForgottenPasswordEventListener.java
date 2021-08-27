@@ -77,4 +77,13 @@ public class ForgottenPasswordEventListener extends AbstractAcceleratorSiteEvent
 		ServicesUtil.validateParameterNotNullStandardMessage("event.site", site);
 		return site.getChannel();
 	}
+
+	public String testThis(final String name) {
+		String returnValue = name + "-Test-This";
+		return returnValue;
+	}
+
+	public String testThat(final String name) {
+		return name + "-Test-That";
+	}
 }
